@@ -1,12 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using SocialSpy.Controllers;
 
 namespace SocialSpy.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class SimpleTests
     {
-        [TestMethod]
+        [Test]
         public void HomeController_ReturnsCorrectValue()
         {
             var controller = new HomeController();
