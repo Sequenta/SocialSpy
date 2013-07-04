@@ -13,7 +13,7 @@ namespace SocialSpy.Controllers
 
         public string Index()
         {
-            return "HelloWorld!";
+            return "TestPhrase!";
         }
 
     }
