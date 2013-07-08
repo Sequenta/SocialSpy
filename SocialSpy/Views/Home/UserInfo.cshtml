@@ -1,0 +1,31 @@
+﻿@model SocialSpy.Models.UserInfo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UserInfo</title>
+</head>
+<body>
+    <div>
+        <div class="span3">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h4>id @Model.UserId</h4>
+                    <img id="image" src="@Model.Image" style="width: auto; height: auto;" alt="DELETED" />
+                    <p id="firstName"><b>First name:</b>@Model.FirstName</p>
+                    <p id="lastName"><b>Last name:</b>@Model.LastName</p>
+                    <p id="sex"><b>Sex:</b>@Model.Sex</p>
+                    <p id="country"><b>Country:</b>@Model.Country</p>
+                    <p id="city"><b>City:</b>@Model.City</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
