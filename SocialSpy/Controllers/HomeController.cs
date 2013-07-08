@@ -9,5 +9,10 @@ namespace SocialSpy.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult GetUserInfo(string request)
+        {
+            return Json(request, JsonRequestBehavior.AllowGet);
+        }
     }
 }
