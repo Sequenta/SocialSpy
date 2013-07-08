@@ -1,23 +1,13 @@
-﻿using System.IO;
-using Microsoft.AspNet.SignalR.Client.Http;
-
-namespace SocialSpy.Models
+﻿namespace SocialSpy.Models
 {
     public class UserInfo
     {
-        public string GetUserInfo(string id)
-        {
-            var http = new DefaultHttpClient();
-            var requestUrl = string.Format("https://api.vk.com/method/getProfiles?uids={0}&fields=sex,city,country", id);
-            var jsonResult = "";
-            using (var result = http.Post(requestUrl, request => { }).Result)
-            {
-                using (var resultStream = new StreamReader(result.GetStream()))
-                {
-                    jsonResult = resultStream.ReadToEnd();
-                }
-            }
-            return jsonResult;
-        } 
+        public string UserId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Sex { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+        public string Image { get; set; }
     }
 }
