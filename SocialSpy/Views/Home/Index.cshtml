@@ -22,12 +22,26 @@
         <form class="form-search">
             <img src="~/Content/images/VKicon.jpg" alt="logo"/>
             <input id="queryField" type="text" class="input-medium search-query" placeholder="input ID or name">
-            <button id="search" type="submit" class="btn btn-info">Search</button>
+            <button id="search" type="submit" class="btn btn-info">
+                <img id="loading" src="~/Content/images/loading.gif" alt="loading"/>
+                <span class="ui-button-text">Search</span>
+            </button>
             <img src="~/Content/images/FBicon.jpg" alt="logo"/>
         </form>
     </div>
     <script type="text/javascript">
-         $(document).ready(function () {
+        $(document).ready(function () {
+            $("#loading").hide();
+            $(document).ajaxStart(function() {
+                $("#loading").show();
+                $("#search").attr("disabled", true);
+                $("#search span").text("Searching");
+            });
+            $(document).ajaxStop(function () {
+                $("#loading").hide();
+                $("#search").attr("disabled", false);
+                $("#search span").text("Search");
+            });
              $("#search").click(function (event) {
                  var serviceUrl = '@Url.Action("GetUserInfo", "Home")';
                  var query = $("#queryField").val();
