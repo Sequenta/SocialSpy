@@ -1,4 +1,7 @@
-﻿@{
+﻿@using SocialSpy.Models
+@model UserInfo
+
+@{
     Layout = null;
 }
 
@@ -29,25 +32,31 @@
             <img src="~/Content/images/FBicon.jpg" alt="logo"/>
         </form>
     </div>
+    <div id ="userInfo" class="row-fluid">
+        
+    </div>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#loading").hide();
+            $("#userInfo").hide();
             $(document).ajaxStart(function() {
                 $("#loading").show();
                 $("#search").attr("disabled", true);
                 $("#search span").text("Searching");
+                $("#userInfo").hide();
             });
             $(document).ajaxStop(function () {
                 $("#loading").hide();
                 $("#search").attr("disabled", false);
                 $("#search span").text("Search");
+                $("#userInfo").show();
             });
              $("#search").click(function (event) {
                  var serviceUrl = '@Url.Action("GetUserInfo", "Home")';
                  var query = $("#queryField").val();
                  event.preventDefault();
-                 $.post(serviceUrl, { request: query }).success(function (data) {
-                     alert(data);
+                 $.post(serviceUrl, { id: query }).success(function (data) {
+                     $("#userInfo").html(data);
                  });
              });
          });
