@@ -21,11 +21,22 @@
         </div>
         <form class="form-search">
             <img src="~/Content/images/VKicon.jpg" alt="logo"/>
-            <input type="text" class="input-medium search-query" placeholder="input ID or name">
-            <button type="submit" class="btn btn-info">Search</button>
+            <input id="queryField" type="text" class="input-medium search-query" placeholder="input ID or name">
+            <button id="search" type="submit" class="btn btn-info">Search</button>
             <img src="~/Content/images/FBicon.jpg" alt="logo"/>
         </form>
     </div>
-    <p>Hello!</p>
+    <script type="text/javascript">
+         $(document).ready(function () {
+             $("#search").click(function (event) {
+                 var serviceUrl = '@Url.Action("GetUserInfo", "Home")';
+                 var query = $("#queryField").val();
+                 event.preventDefault();
+                 $.post(serviceUrl, { request: query }).success(function (data) {
+                     alert(data);
+                 });
+             });
+         });
+    </script>
 </body>
 </html>
