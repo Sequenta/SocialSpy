@@ -1,9 +1,11 @@
 ﻿using System.Web.Mvc;
+using SocialSpy.Models;
 
 namespace SocialSpy.Controllers
 {
     public class HomeController : Controller
     {
+        UserInfo userInfo = new UserInfo();
         public ViewResult Index()
         {
             return View();
@@ -12,7 +14,8 @@ namespace SocialSpy.Controllers
         [HttpPost]
         public ActionResult GetUserInfo(string request)
         {
-            return Json(request, JsonRequestBehavior.AllowGet);
+            var info = userInfo.GetUserInfo(request);
+            return Json(info, JsonRequestBehavior.AllowGet);
         }
     }
 }
