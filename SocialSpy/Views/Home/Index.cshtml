@@ -46,7 +46,10 @@
 
             var userInfoHub = $.connection.vkUserInfoHub;
             userInfoHub.client.viewUserInfo = function (data) {
-                alert(data);
+                var serviceUrl = "@Url.Action("GetUserInfoView", "Home")";
+                $.post(serviceUrl, { jsonUserInfo: data }).success(function (view) {
+                    $("#userInfo").html(view);
+                });
             };
             $.connection.hub.start().done(function () {
                 $('#search').click(function (event) {
