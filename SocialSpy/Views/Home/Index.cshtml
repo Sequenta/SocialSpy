@@ -51,14 +51,6 @@
                 $("#search span").text("Search");
                 $("#userInfo").show();
             });
-             $("#search").click(function (event) {
-                 var serviceUrl = '@Url.Action("GetUserInfo", "Home")';
-                 var query = $("#queryField").val();
-                 event.preventDefault();
-                 $.post(serviceUrl, { id: query }).success(function (data) {
-                     $("#userInfo").html(data);
-                 });
-             });
          });
     </script>
 </body>
