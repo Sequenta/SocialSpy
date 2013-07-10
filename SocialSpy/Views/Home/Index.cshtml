@@ -12,6 +12,8 @@
     <meta name="viewport" content="width=device-width" />
     <script type="text/javascript" src="~/Scripts/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.signalR-1.1.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
     <link type="text/css" rel="stylesheet" href="~/Content/bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="~/Content/MainPage.css"/>
     <title>Index</title>
@@ -42,7 +44,16 @@
             $(document).ajaxStart(onAjaxStart);
             $(document).ajaxStop(onAjaxStop);
 
-
+            var userInfoHub = $.connection.vkUserInfoHub;
+            userInfoHub.client.viewUserInfo = function (data) {
+                alert(data);
+            };
+            $.connection.hub.start().done(function () {
+                $('#search').click(function (event) {
+                    event.preventDefault();
+                    userInfoHub.server.getUserInfo($('#queryField').val());
+                });
+            });
 
             function onAjaxStart() {
                 $("#loading").show();
