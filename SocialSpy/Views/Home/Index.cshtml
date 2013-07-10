@@ -39,18 +39,24 @@
         $(document).ready(function () {
             $("#loading").hide();
             $("#userInfo").hide();
-            $(document).ajaxStart(function() {
+            $(document).ajaxStart(onAjaxStart);
+            $(document).ajaxStop(onAjaxStop);
+
+
+
+            function onAjaxStart() {
                 $("#loading").show();
                 $("#search").attr("disabled", true);
                 $("#search span").text("Searching");
                 $("#userInfo").hide();
-            });
-            $(document).ajaxStop(function () {
+            }
+
+            function onAjaxStop() {
                 $("#loading").hide();
                 $("#search").attr("disabled", false);
                 $("#search span").text("Search");
                 $("#userInfo").show();
-            });
+            }
          });
     </script>
 </body>
