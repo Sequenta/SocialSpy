@@ -16,5 +16,12 @@ namespace SocialSpy.Controllers
             var userInfo = new UserInfo(jsonUserInfo);
             return View("UserInfo", userInfo);
         }
+
+        [HttpPost]
+        public ActionResult GetFriendsInfoView(string jsonUserInfo)
+        {
+            var userInfo = new UserInfo(jsonUserInfo);
+            return View("FriendsView", userInfo);
+        }
     }
 }
