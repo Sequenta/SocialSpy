@@ -165,6 +165,7 @@
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\statistic.jpeg" />
     <Content Include="Content\images\VKicon.jpg" />
     <Content Include="Content\MainPage.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -245,7 +246,9 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -258,6 +261,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\UserInfo.cshtml" />
+    <Content Include="Views\Home\FriendsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
