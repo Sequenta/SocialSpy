@@ -34,8 +34,25 @@
             <img src="~/Content/images/FBicon.jpg" alt="logo"/>
         </form>
     </div>
-    <div id ="userInfo" class="row-fluid">
-        
+    <div id ="info" class="row-fluid">
+        <div class="span4">
+            <h2>User</h2>
+            <div id ="userInfo">
+                
+            </div>
+        </div>
+        <div class="span4">
+            <h2>Friends</h2>
+            <div id ="friendsInfo">
+                
+            </div>
+        </div>
+        <div class="span4">
+            <h2>Statistic</h2>
+            <div id ="statistics">
+                <img src="~/Content/images/statistic.jpeg" alt="statistic"/>
+            </div>
+        </div>
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -49,6 +66,12 @@
                 var serviceUrl = "@Url.Action("GetUserInfoView", "Home")";
                 $.post(serviceUrl, { jsonUserInfo: data }).success(function (view) {
                     $("#userInfo").html(view);
+                });
+                serviceUrl = "@Url.Action("GetFriendsInfoView", "Home")";
+                $.post(serviceUrl, { jsonUserInfo: data }).success(function (view) {
+                    $("#friendsInfo").append(view);
+                    $("#friendsInfo").append(view);
+                    $("#friendsInfo").append(view);
                 });
             };
             $.connection.hub.start().done(function () {
