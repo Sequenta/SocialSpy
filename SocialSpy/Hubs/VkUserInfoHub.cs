@@ -9,7 +9,7 @@ namespace SocialSpy.Hubs
         {
             var informer = new VkInformer();
             var info = informer.GetUserInfo(id);
-            Clients.All.viewUserInfo(info);
+            Clients.Caller.viewUserInfo(info);
         }
     }
 }
