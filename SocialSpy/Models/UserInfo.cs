@@ -13,6 +13,12 @@ namespace SocialSpy.Models
         public string Country { get; set; }
         public string Image { get; set; }
 
+
+        public UserInfo()
+        {
+
+        }
+
         public UserInfo(string jsonParameters)
         {
             jsonParameters = jsonParameters.Replace(@"{""response"":[", "");
