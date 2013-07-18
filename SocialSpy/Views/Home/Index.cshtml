@@ -57,7 +57,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#loading").hide();
-            $("#userInfo").hide();
+            $("#info").hide();
             $(document).ajaxStart(onAjaxStart);
             $(document).ajaxStop(onAjaxStop);
 
@@ -85,14 +85,14 @@
                 $("#loading").show();
                 $("#search").attr("disabled", true);
                 $("#search span").text("Searching");
-                $("#userInfo").hide();
+                $("#info").hide();
             }
 
             function onAjaxStop() {
                 $("#loading").hide();
                 $("#search").attr("disabled", false);
                 $("#search span").text("Search");
-                $("#userInfo").show();
+                $("#info").show();
             }
          });
     </script>
