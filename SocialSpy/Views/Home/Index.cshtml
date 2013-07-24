@@ -1,4 +1,5 @@
-﻿@using SocialSpy.Models
+﻿@using System.Configuration
+@using SocialSpy.Models
 @model UserInfo
 
 @{
@@ -18,83 +19,89 @@
     <link type="text/css" rel="stylesheet" href="~/Content/MainPage.css"/>
     <title>Index</title>
 </head>
-<body>
-    <div class="headContainer">
-        <div class="container">
-            <h1><img src="~/Content/images/logo.png" alt="logo"/>SocialSpy</h1>
-            <p>Find out about your friends a little bit more!</p>
+    <body>
+        <div class="headContainer">
+            <div class="container">
+                <h1><img src="~/Content/images/logo.png" alt="logo"/>SocialSpy</h1>
+                <p>Find out about your friends a little bit more!</p>
+            </div>
+            <form class="form-search">
+                <img src="~/Content/images/VKicon.jpg" alt="logo"/>
+                <input id="queryField" type="text" class="input-medium search-query" placeholder="input ID or name">
+                <button id="search" type="submit" class="btn btn-info">
+                    <img id="loading" src="~/Content/images/loading.gif" alt="loading"/>
+                    <span class="ui-button-text">Search</span>
+                </button>
+                <img src="~/Content/images/FBicon.jpg" alt="logo"/>
+            </form>
         </div>
-        <form class="form-search">
-            <img src="~/Content/images/VKicon.jpg" alt="logo"/>
-            <input id="queryField" type="text" class="input-medium search-query" placeholder="input ID or name">
-            <button id="search" type="submit" class="btn btn-info">
-                <img id="loading" src="~/Content/images/loading.gif" alt="loading"/>
-                <span class="ui-button-text">Search</span>
-            </button>
-            <img src="~/Content/images/FBicon.jpg" alt="logo"/>
-        </form>
-    </div>
-    <div id ="info" class="row-fluid">
-        <div class="span4">
-            <h2>User</h2>
-            <div id ="userInfo">
+        <div id ="info" class="row-fluid">
+            <div class="span4">
+                <h2>User</h2>
+                <div id ="userInfo">
                 
+                </div>
             </div>
-        </div>
-        <div class="span4">
-            <h2>Friends</h2>
-            <div id ="friendsInfo">
+            <div class="span4">
+                <h2>Friends</h2>
+                <div id ="friendsInfo">
                 
+                </div>
+            </div>
+            <div class="span4">
+                <h2>Statistic</h2>
+                <div id ="statistics">
+                    <img src="~/Content/images/statistic.jpeg" alt="statistic"/>
+                </div>
             </div>
         </div>
-        <div class="span4">
-            <h2>Statistic</h2>
-            <div id ="statistics">
-                <img src="~/Content/images/statistic.jpeg" alt="statistic"/>
+        <div id="footer">
+            <div class="container">
+                <p id="connectionString"></p>
             </div>
         </div>
-    </div>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#loading").hide();
-            $("#info").hide();
-            $(document).ajaxStart(onAjaxStart);
-            $(document).ajaxStop(onAjaxStop);
-
-            var userInfoHub = $.connection.vkUserInfoHub;
-            userInfoHub.client.viewUserInfo = function (data) {
-                var serviceUrl = "@Url.Action("GetUserInfoView", "Home")";
-                $.post(serviceUrl, { jsonUserInfo: data }).success(function (view) {
-                    $("#userInfo").html(view);
-                });
-                serviceUrl = "@Url.Action("GetFriendsInfoView", "Home")";
-                $.post(serviceUrl, { jsonUserInfo: data }).success(function (view) {
-                    $("#friendsInfo").append(view);
-                    $("#friendsInfo").append(view);
-                    $("#friendsInfo").append(view);
-                });
-            };
-            $.connection.hub.start().done(function () {
-                $('#search').click(function (event) {
-                    event.preventDefault();
-                    userInfoHub.server.getUserInfo($('#queryField').val());
-                });
-            });
-
-            function onAjaxStart() {
-                $("#loading").show();
-                $("#search").attr("disabled", true);
-                $("#search span").text("Searching");
-                $("#info").hide();
-            }
-
-            function onAjaxStop() {
+        <script type="text/javascript">
+            $(document).ready(function () {
                 $("#loading").hide();
-                $("#search").attr("disabled", false);
-                $("#search span").text("Search");
-                $("#info").show();
-            }
-         });
-    </script>
-</body>
+                $("#info").hide();
+                $(document).ajaxStart(onAjaxStart);
+                $(document).ajaxStop(onAjaxStop);
+                $("#connectionString").html("@ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString");
+
+                var userInfoHub = $.connection.vkUserInfoHub;
+                userInfoHub.client.viewUserInfo = function (data) {
+                    var serviceUrl = "@Url.Action("GetUserInfoView", "Home")";
+                    $.post(serviceUrl, { jsonUserInfo: data }).success(function (view) {
+                        $("#userInfo").html(view);
+                    });
+                    serviceUrl = "@Url.Action("GetFriendsInfoView", "Home")";
+                    $.post(serviceUrl, { jsonUserInfo: data }).success(function (view) {
+                        $("#friendsInfo").append(view);
+                        $("#friendsInfo").append(view);
+                        $("#friendsInfo").append(view);
+                    });
+                };
+                $.connection.hub.start().done(function () {
+                    $('#search').click(function (event) {
+                        event.preventDefault();
+                        userInfoHub.server.getUserInfo($('#queryField').val());
+                    });
+                });
+
+                function onAjaxStart() {
+                    $("#loading").show();
+                    $("#search").attr("disabled", true);
+                    $("#search span").text("Searching");
+                    $("#info").hide();
+                }
+
+                function onAjaxStop() {
+                    $("#loading").hide();
+                    $("#search").attr("disabled", false);
+                    $("#search span").text("Search");
+                    $("#info").show();
+                }
+            });
+        </script>
+    </body>
 </html>
