@@ -12,11 +12,11 @@ namespace SocialSpy.Models
         public string City { get; set; }
         public string Country { get; set; }
         public string Image { get; set; }
-
+        public bool Deactivated { get; set; }
 
         public UserInfo()
         {
-
+            
         }
 
         public UserInfo(string jsonParameters)
