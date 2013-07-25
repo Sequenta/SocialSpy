@@ -1,10 +1,12 @@
-﻿using Xunit;
+﻿using NUnit.Framework;
 
 namespace SocialSpy.Tests.ModelTests
 {
+    [TestFixture]
     public class UserInfoTests
     {
-        [Fact(Skip = "Useless test")]
+        [Test]
+        [Ignore("Useless test")]
         public void UserInfo_ReturnsEmptyInstance_WhenJsonStringIsEmpty()
         {
             Assert.True(true);

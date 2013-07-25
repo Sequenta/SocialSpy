@@ -1,29 +1,31 @@
-﻿using SocialSpy.Api.VK;
-using Xunit;
+﻿using NUnit.Framework;
+using SocialSpy.Api.VK;
 
 namespace SocialSpy.Api.Tests
 {
+    [TestFixture]
     public class ResponceValidatorTests
     {
         ResponseValidator validator = new ResponseValidator();
 
-        [Fact]
+        [Test]
         public void ReturnsDataWithoutResponseTag()
         {
             var result = validator.RemoveResponseTag("response: [{uid: 1,first_name: 'Павел',last_name: 'Дуров'}]");
-            Assert.Equal("{uid: 1,first_name: 'Павел',last_name: 'Дуров'}",result);
+            Assert.AreEqual("{uid: 1,first_name: 'Павел',last_name: 'Дуров'}", result);
         }
 
-        [Fact]
+        [Test]
         public void ReturnsValidResponseData()
         {
             var result = validator.GetResponseData("response: [{uid: 1,first_name: 'Павел',last_name: 'Дуров'}]");
-            Assert.Equal("1",result["uid"]);
-            Assert.Equal("Павел",result["first_name"]);
-            Assert.Equal("Дуров",result["last_name"]);
+            var res = result["uid"];
+            Assert.AreEqual("1", result["uid"].ToString());
+            Assert.AreEqual("Павел", result["first_name"].ToString());
+            Assert.AreEqual("Дуров", result["last_name"].ToString());
         }
 
-        [Fact]
+        [Test]
         public void ThrowsEmptyResponseException()
         {
             Assert.Throws<EmptyResponseException>(() => validator.GetResponseData(""));
