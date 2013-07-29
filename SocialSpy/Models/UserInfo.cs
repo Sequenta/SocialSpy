@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNet.SignalR.Json;
+using SocialSpy.Api.VK;
 
 namespace SocialSpy.Models
 {
@@ -21,8 +22,7 @@ namespace SocialSpy.Models
 
         public UserInfo(string jsonParameters)
         {
-            jsonParameters = jsonParameters.Replace(@"{""response"":[", "");
-            jsonParameters = jsonParameters.Remove(jsonParameters.Length - 2);
+            jsonParameters = ResponseValidator.RemoveResponseTag(jsonParameters);
             var serializer = new JsonNetSerializer();
             var values = serializer.Parse<Dictionary<string, string>>(jsonParameters);
             UserId = values["uid"];
