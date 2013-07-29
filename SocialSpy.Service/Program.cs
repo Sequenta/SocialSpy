@@ -13,7 +13,6 @@ namespace SocialSpy.Service
         {
             var mode = args[0];
             Console.WriteLine("Mode = {0}",mode);
-            var hostName = Settings.Default.HostName;
             IdReceiver receiver;
             InfoSender sender;
             switch (mode)
