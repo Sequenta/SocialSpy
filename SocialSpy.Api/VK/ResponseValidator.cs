@@ -18,10 +18,10 @@ namespace SocialSpy.Api.VK
             return JObject.Parse(responseData);
         }
 
-        public string RemoveResponseTag(string responseJson)
+        public static string RemoveResponseTag(string responseJson)
         {
-            var responseData = responseJson.Replace(@"response: [", "");
-            responseData = responseData.Remove(responseData.Length - 1);
+            var responseData = responseJson.Replace(@"{""response"":[", "");
+            responseData = responseData.Remove(responseData.Length - 2);
             return responseData;
         }
     }
