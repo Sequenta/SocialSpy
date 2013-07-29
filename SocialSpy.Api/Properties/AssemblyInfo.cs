@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется с помощью 
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("SocialSpy.Tests")]
+[assembly: AssemblyTitle("SocialSpy.Api")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SocialSpy.Tests")]
+[assembly: AssemblyProduct("SocialSpy.Api")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("56bf67ce-41fd-441d-b296-0f72eb80925d")]
+[assembly: Guid("264f39d1-93b3-427d-b96d-80f7f05103fd")]
 
 // Сведения о версии сборки состоят из следующих четырех значений:
 //

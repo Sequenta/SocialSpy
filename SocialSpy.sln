@@ -3,29 +3,50 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialSpy", "SocialSpy\SocialSpy.csproj", "{C1F4A7E5-2123-4E18-9712-8D8FC9356A1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialSpy.Tests", "SocialSpy.Tests\SocialSpy.Tests.csproj", "{5BC847E0-8D02-424B-8FBF-CE33ADF30CC6}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1E7360BB-7D8F-4BC3-8F58-0D7953E59A72}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{0279189D-8472-4EF0-A12B-195712120212}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialSpy.Api", "SocialSpy.Api\SocialSpy.Api.csproj", "{0F6BF127-D3C2-4639-84A4-FAF70C1E76FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialSpy.Api.Tests", "SocialSpy.Api.Tests\SocialSpy.Api.Tests.csproj", "{0C896A80-67FB-474B-B782-ED3245612C85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialSpy.Tests", "SocialSpy.Tests\SocialSpy.Tests.csproj", "{25C29024-7B84-41FB-9538-3DFC286D5A1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		UAT|Any CPU = UAT|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C1F4A7E5-2123-4E18-9712-8D8FC9356A1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C1F4A7E5-2123-4E18-9712-8D8FC9356A1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1F4A7E5-2123-4E18-9712-8D8FC9356A1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1F4A7E5-2123-4E18-9712-8D8FC9356A1E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5BC847E0-8D02-424B-8FBF-CE33ADF30CC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5BC847E0-8D02-424B-8FBF-CE33ADF30CC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5BC847E0-8D02-424B-8FBF-CE33ADF30CC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5BC847E0-8D02-424B-8FBF-CE33ADF30CC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1F4A7E5-2123-4E18-9712-8D8FC9356A1E}.UAT|Any CPU.ActiveCfg = UAT|Any CPU
+		{C1F4A7E5-2123-4E18-9712-8D8FC9356A1E}.UAT|Any CPU.Build.0 = UAT|Any CPU
+		{0F6BF127-D3C2-4639-84A4-FAF70C1E76FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F6BF127-D3C2-4639-84A4-FAF70C1E76FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F6BF127-D3C2-4639-84A4-FAF70C1E76FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F6BF127-D3C2-4639-84A4-FAF70C1E76FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F6BF127-D3C2-4639-84A4-FAF70C1E76FA}.UAT|Any CPU.ActiveCfg = UAT|Any CPU
+		{0F6BF127-D3C2-4639-84A4-FAF70C1E76FA}.UAT|Any CPU.Build.0 = UAT|Any CPU
+		{0C896A80-67FB-474B-B782-ED3245612C85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C896A80-67FB-474B-B782-ED3245612C85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C896A80-67FB-474B-B782-ED3245612C85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C896A80-67FB-474B-B782-ED3245612C85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C896A80-67FB-474B-B782-ED3245612C85}.UAT|Any CPU.ActiveCfg = UAT|Any CPU
+		{0C896A80-67FB-474B-B782-ED3245612C85}.UAT|Any CPU.Build.0 = UAT|Any CPU
+		{25C29024-7B84-41FB-9538-3DFC286D5A1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25C29024-7B84-41FB-9538-3DFC286D5A1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25C29024-7B84-41FB-9538-3DFC286D5A1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25C29024-7B84-41FB-9538-3DFC286D5A1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25C29024-7B84-41FB-9538-3DFC286D5A1E}.UAT|Any CPU.ActiveCfg = UAT|Any CPU
+		{25C29024-7B84-41FB-9538-3DFC286D5A1E}.UAT|Any CPU.Build.0 = UAT|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

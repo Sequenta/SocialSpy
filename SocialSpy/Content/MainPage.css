@@ -1,0 +1,16 @@
+﻿.headContainer {
+    position: relative;
+    text-align: center;
+}
+
+    .headContainer h1 {
+        font-size: 120px;
+        letter-spacing: -2px;
+        line-height: 1;
+    }
+
+    .headContainer p {
+        font-size: 40px;
+        font-weight: 200;
+        line-height: 1.25;
+    }
