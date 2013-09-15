@@ -14,13 +14,10 @@ namespace SocialSpy.Service
     public class IdReceiver
     {
         private ConnectionFactory connectionFactory;
-        public delegate void MessageReceived(object sender, string message);
-        public event MessageReceived OnMessageReceived = delegate { };
 
         public IdReceiver()
         {
             connectionFactory = new ConnectionFactory{HostName = Settings.Default.HostName};
-            OnMessageReceived += GetUserFriends;
         }
 
         public void ReceiveUserId()
@@ -39,14 +36,15 @@ namespace SocialSpy.Service
                         var message = Encoding.UTF8.GetString(body);
                         if (message != string.Empty)
                         {
-                            OnMessageReceived(this, message);
+                            Console.WriteLine(message);
+                            GetUserFriends(message);
                         }
                     }
                 }
             }
         }
 
-        private void GetUserFriends(object sender, string message)
+        private void GetUserFriends(string message)
         {
             var friendsList = GetFriendsList(message);
             PublishFriendsId(friendsList);

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
+using SocialSpy.Api.VK;
 
-namespace SocialSpy.Api.VK
+namespace SocialSpy.Service
 {
     public class ResponseValidator
     {
@@ -14,7 +15,7 @@ namespace SocialSpy.Api.VK
             return JObject.Parse(responseBody);
         }
 
-        public string GetResponseBody(string responseJson)
+        public static string GetResponseBody(string responseJson)
         {
             var response = JObject.Parse(responseJson);
             var responseValues = (JArray) response["response"];

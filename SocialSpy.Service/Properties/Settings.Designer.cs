@@ -34,5 +34,29 @@ namespace SocialSpy.Service.Properties {
                 this["HostName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:23789")]
+        public string HubConnectionString {
+            get {
+                return ((string)(this["HubConnectionString"]));
+            }
+            set {
+                this["HubConnectionString"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("vkUserInfoHub")]
+        public string HubName {
+            get {
+                return ((string)(this["HubName"]));
+            }
+            set {
+                this["HubName"] = value;
+            }
+        }
     }
 }

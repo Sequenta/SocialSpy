@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNet.SignalR.Json;
-using SocialSpy.Api.VK;
+﻿using SocialSpy.Api.VK;
+using SocialSpy.Service;
 
 namespace SocialSpy.Models
 {
@@ -9,36 +8,16 @@ namespace SocialSpy.Models
         public string UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Sex { get; set; }
-        public string City { get; set; }
-        public string Country { get; set; }
         public string Image { get; set; }
-        public bool Deactivated { get; set; }
 
-        public UserInfo()
+        public UserInfo(string jsonUserInfo)
         {
-            
-        }
-
-        public UserInfo(string jsonParameters)
-        {
-            jsonParameters = ResponseValidator.RemoveResponseTag(jsonParameters);
-            var serializer = new JsonNetSerializer();
-            var values = serializer.Parse<Dictionary<string, string>>(jsonParameters);
-            UserId = values["uid"];
-            FirstName = values["first_name"];
-            LastName = values["last_name"];
-            Sex = TryGetValue("sex", values);
-            City = TryGetValue("city", values);
-            Country = TryGetValue("country", values);
-            Image = TryGetValue("photo_200_orig", values);
-        }
-
-        private string TryGetValue(string valueName, Dictionary<string, string> values)
-        {
-            string outValue;
-            values.TryGetValue(valueName, out outValue);
-            return outValue;
+            var validator = new ResponseValidator();
+            var userInfo = validator.GetResponseData(jsonUserInfo);
+            UserId = userInfo["uid"].ToString();
+            FirstName = userInfo["first_name"].ToString();
+            LastName = userInfo["last_name"].ToString();
+            Image = userInfo["photo_200_orig"].ToString();
         }
     }
 }

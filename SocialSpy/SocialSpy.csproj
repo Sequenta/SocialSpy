@@ -229,6 +229,41 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\flot\excanvas.js" />
+    <Content Include="Scripts\flot\excanvas.min.js" />
+    <Content Include="Scripts\flot\jquery.colorhelpers.js" />
+    <Content Include="Scripts\flot\jquery.colorhelpers.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.canvas.js" />
+    <Content Include="Scripts\flot\jquery.flot.canvas.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.categories.js" />
+    <Content Include="Scripts\flot\jquery.flot.categories.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.crosshair.js" />
+    <Content Include="Scripts\flot\jquery.flot.crosshair.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.errorbars.js" />
+    <Content Include="Scripts\flot\jquery.flot.errorbars.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.fillbetween.js" />
+    <Content Include="Scripts\flot\jquery.flot.fillbetween.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.image.js" />
+    <Content Include="Scripts\flot\jquery.flot.image.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.js" />
+    <Content Include="Scripts\flot\jquery.flot.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.navigate.js" />
+    <Content Include="Scripts\flot\jquery.flot.navigate.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.pie.js" />
+    <Content Include="Scripts\flot\jquery.flot.pie.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.resize.js" />
+    <Content Include="Scripts\flot\jquery.flot.resize.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.selection.js" />
+    <Content Include="Scripts\flot\jquery.flot.selection.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.stack.js" />
+    <Content Include="Scripts\flot\jquery.flot.stack.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.symbol.js" />
+    <Content Include="Scripts\flot\jquery.flot.symbol.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.threshold.js" />
+    <Content Include="Scripts\flot\jquery.flot.threshold.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.time.js" />
+    <Content Include="Scripts\flot\jquery.flot.time.min.js" />
+    <Content Include="Scripts\friendViewTemplate.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
@@ -237,6 +272,8 @@
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\jquery.signalR-1.1.2.js" />
     <Content Include="Scripts\jquery.signalR-1.1.2.min.js" />
+    <Content Include="Scripts\jQuery.tmpl.js" />
+    <Content Include="Scripts\jQuery.tmpl.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -283,6 +320,10 @@
       <Project>{0f6bf127-d3c2-4639-84a4-faf70c1e76fa}</Project>
       <Name>SocialSpy.Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SocialSpy.Service\SocialSpy.Service.csproj">
+      <Project>{52320ac4-09e5-4b64-800e-693715348ad9}</Project>
+      <Name>SocialSpy.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -307,9 +348,9 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>23789</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:41325/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

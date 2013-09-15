@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SocialSpy.Service.Properties;
 
 namespace SocialSpy.Service
 {
@@ -13,17 +8,19 @@ namespace SocialSpy.Service
         {
             var mode = args[0];
             Console.WriteLine("Mode = {0}",mode);
-            IdReceiver receiver;
-            InfoSender sender;
             switch (mode)
             {
                 case "idreceiver":
-                    receiver = new IdReceiver();
+                    var receiver = new IdReceiver();
                     receiver.ReceiveUserId();
                     break;
                 case "infosender":
-                    sender = new InfoSender();
-                    sender.SendFriendId();
+                    var infoSender = new InfoSender();
+                    infoSender.SendFriendInfo();
+                    break;
+                case "statisticsender":
+                    var statisticSender = new StatisticSender();
+                    statisticSender.SendStatistic();
                     break;
                 default:
                     Console.WriteLine("Unknown mode! Is="+mode);

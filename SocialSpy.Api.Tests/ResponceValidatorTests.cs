@@ -9,20 +9,22 @@ namespace SocialSpy.Api.Tests
         ResponseValidator validator = new ResponseValidator();
 
         [Test]
-        public void ReturnsDataWithoutResponseTag()
-        {
-            var result = validator.RemoveResponseTag("response: [{uid: 1,first_name: 'Павел',last_name: 'Дуров'}]");
-            Assert.AreEqual("{uid: 1,first_name: 'Павел',last_name: 'Дуров'}", result);
-        }
-
-        [Test]
         public void ReturnsValidResponseData()
         {
-            var result = validator.GetResponseData("response: [{uid: 1,first_name: 'Павел',last_name: 'Дуров'}]");
-            var res = result["uid"];
-            Assert.AreEqual("1", result["uid"].ToString());
-            Assert.AreEqual("Павел", result["first_name"].ToString());
-            Assert.AreEqual("Дуров", result["last_name"].ToString());
+            var response = @"{
+                                ""response"": 
+                                [
+                                    {
+                                        ""uid"": ""1"",
+                                        ""first_name"": ""Павел"",
+                                        ""last_name"": ""Дуров""
+                                    }
+                                ]
+                            }";
+            var result = validator.GetResponseData(response);
+            Assert.AreEqual("1",result["uid"].ToString());
+            Assert.AreEqual("Павел",result["first_name"].ToString());
+            Assert.AreEqual("Дуров",result["last_name"].ToString());
         }
 
         [Test]

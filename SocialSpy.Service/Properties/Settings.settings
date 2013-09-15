@@ -5,5 +5,11 @@
     <Setting Name="HostName" Type="System.String" Scope="User">
       <Value Profile="(Default)">localhost</Value>
     </Setting>
+    <Setting Name="HubConnectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:23789</Value>
+    </Setting>
+    <Setting Name="HubName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">vkUserInfoHub</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

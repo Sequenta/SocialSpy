@@ -1,5 +1,7 @@
 using System.IO;
+using System.Text;
 using Microsoft.AspNet.SignalR.Client.Http;
+using RabbitMQ.Client;
 
 namespace SocialSpy.Api.VK
 {
@@ -18,6 +20,27 @@ namespace SocialSpy.Api.VK
                 }
             }
             return userInfo;
-        } 
+        }
+
+        public void GetFriendsInfo(string id)
+        {
+            PublishUserId(id);
+        }
+
+        private void PublishUserId(string id)
+        {
+            var connectionFactory = new ConnectionFactory { HostName = "localhost" };
+            using (IConnection connection = connectionFactory.CreateConnection())
+            {
+                using (IModel channel = connection.CreateModel())
+                {
+                    var body = Encoding.UTF8.GetBytes(id);
+                    channel.QueueDeclare("idQueue", false, false, false, null);
+                    channel.BasicPublish("", "idQueue", null, body);
+                    channel.QueueDeclare("statisticQueue", false, false, false, null);
+                    channel.BasicPublish("", "statisticQueue", null, body);
+                }
+            }
+        }
     }
 }

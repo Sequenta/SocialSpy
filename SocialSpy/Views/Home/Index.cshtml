@@ -1,5 +1,4 @@
-﻿@using System.Configuration
-@using SocialSpy.Models
+﻿@using SocialSpy.Models
 @model UserInfo
 
 @{
@@ -11,13 +10,23 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+
     <script type="text/javascript" src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jQuery.tmpl.min.js"></script>
     <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.signalR-1.1.2.min.js"></script>
     <script src="~/signalr/hubs"></script>
     <link type="text/css" rel="stylesheet" href="~/Content/bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="~/Content/MainPage.css"/>
+    
+    <script language="javascript" type="text/javascript" src="~/Scripts/flot/jquery.flot.js"></script>
+	<script language="javascript" type="text/javascript" src="~/Scripts/flot/jquery.flot.pie.js"></script>
+    
     <title>Index</title>
+    <script >
+        var markup = "<div><img style='display: inline-block;width: 50px; height: 50px;' src=${photo_50} alt='DELETED'/><p style='display: inline-block;'>${first_name} ${last_name}</p></div>";
+        $.template("friendViewTemplate", markup );
+    </script>
 </head>
     <body>
         <div class="headContainer">
@@ -52,7 +61,8 @@
                 <h2>Statistic</h2>
                 <div id ="statistics">
                     <p>Coming soon!</p>
-                    <img src="~/Content/images/statistic.jpeg" alt="statistic"/>
+                    <div id="chart1" style="height:100px; width:100px;"></div>
+                    @*<img src="~/Content/images/statistic.jpeg" alt="statistic"/>*@
                 </div>
             </div>
         </div>
@@ -72,14 +82,42 @@
                 userInfoHub.client.viewUserInfo = function (data) {
                     var serviceUrl = "@Url.Action("GetUserInfoView", "Home")";
                     $.post(serviceUrl, { jsonUserInfo: data }).success(function (view) {
+                        $("#friendsInfo").empty();
                         $("#userInfo").html(view);
-                        $("#friendsInfo").html("Coming soon!");
                     });
                 };
+                
+                userInfoHub.client.viewFriendsInfo = function (data) {
+                    var friendInfo = jQuery.parseJSON(data);
+                    $.tmpl("friendViewTemplate", friendInfo).appendTo("#friendsInfo");
+                };
+                
+                userInfoHub.client.viewUserStatistic = function (data) {
+                    var male = [];
+                    male.push("Male");
+                    male.push(50);
+                    var female = [];
+                    female.push("Female");
+                    female.push(50);
+                    var graphData = [];
+                    graphData.push(male);
+                    graphData.push(female);
+                    $.plot('#chart1', graphData, {
+                        series: {
+                            pie: {
+                                show: true
+                            }
+                        }
+                    });
+                    $("#statistics").append(data);
+                };
+                
                 $.connection.hub.start().done(function () {
+                    console.info('SignalR connected');
                     $('#search').click(function (event) {
                         event.preventDefault();
                         userInfoHub.server.getUserInfo($('#queryField').val());
+                        userInfoHub.server.getFriendsInfo($('#queryField').val());
                     });
                 });
 

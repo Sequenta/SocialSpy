@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
+using Microsoft.AspNet.SignalR.Client.Hubs;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using SocialSpy.Service.Properties;
@@ -13,16 +12,18 @@ namespace SocialSpy.Service
     public class InfoSender
     {
         private ConnectionFactory connectionFactory;
-        public delegate void MessageReceived(object sender, string message);
-        public event MessageReceived OnMessageReceived = delegate { };
+        private HubConnection clientsideHubConnection;
+        private IHubProxy clientsideHubProxy;
 
         public InfoSender()
         {
+            clientsideHubConnection = new HubConnection(Settings.Default.HubConnectionString);
+            clientsideHubProxy = clientsideHubConnection.CreateHubProxy(Settings.Default.HubName);
+            clientsideHubConnection.Start().Wait();
             connectionFactory = new ConnectionFactory { HostName = Settings.Default.HostName };
-            OnMessageReceived += GetFriendInfo;
         }
 
-        public void SendFriendId()
+        public void SendFriendInfo()
         {
             using (var connection = connectionFactory.CreateConnection())
             {
@@ -38,23 +39,24 @@ namespace SocialSpy.Service
                         var message = Encoding.UTF8.GetString(body);
                         if (message != string.Empty)
                         {
-                            OnMessageReceived(this, message);
+                            PublishFriendInfo(message);
                         }
                     }
                 }
             }
         }
 
-        private void GetFriendInfo(object sender, string message)
+        private void PublishFriendInfo(string message)
         {
-            var friendInfo = GetFriendsList(message);
-            PublishFriendInfo(friendInfo);
+            var friendInfo = GetFriendInfo(message);
+            Console.WriteLine(friendInfo);
+            clientsideHubProxy.Invoke("ShowFriendInfo", friendInfo).Wait();
         }
 
-        private string GetFriendsList(string id)
+        private string GetFriendInfo(string id)
         {
             string json = String.Empty;
-            string urlString = String.Format("https://api.vk.com/method/getProfiles?uids={0}", id);
+            string urlString = String.Format("https://api.vk.com/method/getProfiles?uids={0}&fields=photo_50", id);
             var request = WebRequest.Create(new Uri(urlString)) as HttpWebRequest;
             var response = (HttpWebResponse)request.GetResponse();
             using (var stream = response.GetResponseStream())
@@ -64,29 +66,8 @@ namespace SocialSpy.Service
                     json = sr.ReadToEnd();
                 }
             }
-
-            json = json.Replace(@"{""response"":[", "");
-            json = json.Remove(json.Length - 2);
-
-            if (string.IsNullOrEmpty(json))
-            {
-                return "";
-            }
-
-            return json;
-        }
-
-        private void PublishFriendInfo(string friendInfo)
-        {
-            using (IConnection connection = connectionFactory.CreateConnection())
-            {
-                using (IModel channel = connection.CreateModel())
-                {
-                    var body = Encoding.UTF8.GetBytes(friendInfo);
-                    channel.QueueDeclare("friendsInfoQueue", false, false, false, null);
-                    channel.BasicPublish("", "friendsInfoQueue", null, body);
-                }
-            }
+            json = ResponseValidator.GetResponseBody(json);
+            return string.IsNullOrEmpty(json) ? "" : json;
         }
     }
 }
