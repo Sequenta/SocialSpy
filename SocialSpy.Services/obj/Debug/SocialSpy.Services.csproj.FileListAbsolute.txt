@@ -1,0 +1,9 @@
+C:\Dev\Projects\SocialSpy\SocialSpy.Services\bin\Debug\SocialSpy.Services.dll
+C:\Dev\Projects\SocialSpy\SocialSpy.Services\bin\Debug\SocialSpy.Services.pdb
+C:\Dev\Projects\SocialSpy\SocialSpy.Services\bin\Debug\Newtonsoft.Json.dll
+C:\Dev\Projects\SocialSpy\SocialSpy.Services\bin\Debug\SocialSpy.Domain.dll
+C:\Dev\Projects\SocialSpy\SocialSpy.Services\bin\Debug\SocialSpy.Domain.pdb
+C:\Dev\Projects\SocialSpy\SocialSpy.Services\bin\Debug\Newtonsoft.Json.xml
+C:\Dev\Projects\SocialSpy\SocialSpy.Services\obj\Debug\SocialSpy.Services.csprojResolveAssemblyReference.cache
+C:\Dev\Projects\SocialSpy\SocialSpy.Services\obj\Debug\SocialSpy.Services.dll
+C:\Dev\Projects\SocialSpy\SocialSpy.Services\obj\Debug\SocialSpy.Services.pdb
