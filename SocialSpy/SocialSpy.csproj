@@ -154,6 +154,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserInfoHub.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-responsive.css" />
@@ -312,6 +313,16 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SocialSpy.Domain\SocialSpy.Domain.csproj">
+      <Project>{AD62E123-69C5-4448-A553-9428DF500371}</Project>
+      <Name>SocialSpy.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SocialSpy.Services\SocialSpy.Services.csproj">
+      <Project>{2d12dc1d-1800-46dd-939a-7a5333d77da1}</Project>
+      <Name>SocialSpy.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

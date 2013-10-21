@@ -18,7 +18,7 @@ namespace SocialSpy.Services
             {
                 using (var sr = new StreamReader(stream))
                 {
-                    var userInfoJson = JObject.Parse(sr.ReadToEnd())["response"];
+                    var userInfoJson = JObject.Parse(sr.ReadToEnd())["response"].First;
                     userInfo.FirstName = userInfoJson["first_name"].ToString();
                     userInfo.LastName = userInfoJson["last_name"].ToString();
                     userInfo.PictureUrl = userInfoJson["photo_200_orig"].ToString();

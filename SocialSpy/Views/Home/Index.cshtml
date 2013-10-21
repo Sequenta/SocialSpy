@@ -96,28 +96,27 @@
                     $("#info").show();
                 }
 
-                var userInfoHub = $.connection.vkUserInfoHub;
+                var userInfoHub = $.connection.userInfoHub;
                 userInfoHub.client.viewUserInfo = function (data) {
-                    var userInfo = jQuery.parseJSON(data);
-                    $.tmpl("userViewTemplate", userInfo).appendTo("#friendsInfo");
+                    debugger;
+                    var j = JSON.parse(data.toString());
+                    $.tmpl("userViewTemplate", data).appendTo("#friendsInfo");
                 };
                 
-                userInfoHub.client.viewFriendsInfo = function (data) {
-                    var friendInfo = jQuery.parseJSON(data);
-                    $.tmpl("friendViewTemplate", friendInfo).appendTo("#friendsInfo");
-                };
+                //userInfoHub.client.viewFriendsInfo = function (data) {
+                //    var friendInfo = jQuery.parseJSON(data);
+                //    $.tmpl("friendViewTemplate", friendInfo).appendTo("#friendsInfo");
+                //};
                 
-                userInfoHub.client.viewUserStatistic = function (data) {
-                    $("#statistics").append(data);
-                };
+                //userInfoHub.client.viewUserStatistic = function (data) {
+                //    $("#statistics").append(data);
+                //};
                 
                 $.connection.hub.start().done(function () {
                     console.info('SignalR connected');
                     $('#search').click(function (event) {
                         event.preventDefault();
-                        userInfoHub.server.getUserInfo($('#queryField').val());
-                        userInfoHub.server.getFriendsInfo($('#queryField').val());
-                        
+                        userInfoHub.server.getUserInfo($('#queryField').val(), "facebook");
                     });
                 });
             });
