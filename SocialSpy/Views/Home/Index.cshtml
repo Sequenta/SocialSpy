@@ -12,17 +12,19 @@
     <script type="text/javascript" src="~/Scripts/jQuery.tmpl.min.js"></script>
     <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.signalR-1.1.2.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/knockout-2.2.0.js"></script>
+    <script type="text/javascript" src="~/Scripts/chart.js"></script>
+    <script type="text/javascript" src="~/Scripts/legend.js"></script>
     <script src="~/signalr/hubs"></script>
     <link type="text/css" rel="stylesheet" href="~/Content/bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="~/Content/MainPage.css"/>
     
-    <script type="text/javascript" src="~/Scripts/flot/jquery.flot.js"></script>
-	<script type="text/javascript" src="~/Scripts/flot/jquery.flot.pie.js"></script>
+
     
     <title>Index</title>
     <script >
-        var friendViewMarkup = "<div>" +
-            "<img style='display: inline-block;width: 50px; height: 50px;' src=${photo_50} alt='DELETED'/>" +
+        var friendViewMarkup = "<div style='margin:5px;'>" +
+            "<img style='display: inline-block;width: 50px; height: 50px;' src=${photo_200_orig} alt='DELETED'/>" +
                 "<p style='display: inline-block;'>${first_name} ${last_name}</p>" +
             "</div>";
         $.template("friendViewTemplate", friendViewMarkup);
@@ -42,12 +44,16 @@
             <form class="form-search">
                 <img src="~/Content/images/VKicon.jpg" alt="logo"/>
                 <input id="queryField" type="text" class="input-medium search-query" placeholder="input ID or name">
-                <button id="search" type="submit" class="btn btn-info">
+                <button id="search" type="submit" class="btn btn-info" data-bind="click: search">
                     <img id="loading" src="~/Content/images/loading.gif" alt="loading"/>
                     <span class="ui-button-text">Search</span>
                 </button>
                 <img src="~/Content/images/FBicon.jpg" alt="logo"/>
             </form>
+            <div class="btn-group" data-toggle="buttons-radio">
+                <button type="button" class="btn" data-bind="click:function(){network('vkontakte')}">Vkontakte</button>
+                <button type="button" class="btn" data-bind="click:function(){network('facebook')}">Facebook</button>
+            </div>
         </div>
         <div id ="info" class="row-fluid">
             <div class="span4">
@@ -59,14 +65,17 @@
             <div class="span4">
                 <h2>Friends</h2>
                 <div id ="friendsInfo">
-                
                 </div>
             </div>
             <div class="span4">
                 <h2>Statistic</h2>
                 <div id ="statistics">
-                    <p>Coming soon!</p>
-
+                    <h4>Sex statistics</h4>
+                    <canvas id="sexStatistic" width="200" height="200"></canvas>
+                    <div id="sexLegend"></div>
+                    <h4>Online statistics</h4>
+                    <canvas id="onlineStatistic" width="200" height="200"></canvas>
+                    <div id="onlineLegend"></div>
                 </div>
             </div>
         </div>
@@ -76,49 +85,74 @@
             </div>
         </div>
         <script type="text/javascript">
-            $(document).ready(function () {
+            $(function() {
                 $("#loading").hide();
-                $("#info").hide();
-                $(document).ajaxStart(onAjaxStart);
-                $(document).ajaxStop(onAjaxStop);
-                
-                function onAjaxStart() {
-                    $("#loading").show();
-                    $("#search").attr("disabled", true);
-                    $("#search span").text("Searching");
-                    $("#info").hide();
-                }
-
-                function onAjaxStop() {
-                    $("#loading").hide();
-                    $("#search").attr("disabled", false);
-                    $("#search span").text("Search");
-                    $("#info").show();
-                }
 
                 var userInfoHub = $.connection.userInfoHub;
                 userInfoHub.client.viewUserInfo = function (data) {
-                    debugger;
-                    var j = JSON.parse(data.toString());
-                    $.tmpl("userViewTemplate", data).appendTo("#friendsInfo");
+                    var json = JSON.parse(data);
+                    $("#userInfo").html("");
+                    $.tmpl("userViewTemplate", json).appendTo("#userInfo");
                 };
                 
-                //userInfoHub.client.viewFriendsInfo = function (data) {
-                //    var friendInfo = jQuery.parseJSON(data);
-                //    $.tmpl("friendViewTemplate", friendInfo).appendTo("#friendsInfo");
-                //};
+                userInfoHub.client.viewFriendsInfo = function (data) {
+                    var friendInfo = jQuery.parseJSON(data);
+                    $.tmpl("friendViewTemplate", friendInfo).appendTo("#friendsInfo");
+                };
                 
-                //userInfoHub.client.viewUserStatistic = function (data) {
-                //    $("#statistics").append(data);
-                //};
+                userInfoHub.client.viewFriendsStatistics = function (data) {
+                    var sexStatistics = [
+                        {
+                            value: data.boys,
+                            color: "#F38630",
+                            title: "Boys"
+                        },
+                        {
+                            value: data.girls,
+                            color: "#E0E4CC",
+                            title: "Girls"
+                        },
+                        {
+                            value: data.undefined,
+                            color: "#4D5360",
+                            title: "Undefined"
+                        }
+                    ];
+                    var onlineStatistics = [
+                        {
+                            value: data.online,
+                            color: "#F38630",
+                            title: "Online"
+                        },
+                        {
+                            value: data.offline,
+                            color: "#4D5360",
+                            title: "Offline"
+                        }
+                    ];
+                    var sexContext = $("#sexStatistic").get(0).getContext("2d");
+                    var sexChart = new Chart(sexContext).Pie(sexStatistics);
+                    legend(document.getElementById("sexLegend"), sexStatistics);
+                    
+                    var onlineContext = $("#onlineStatistic").get(0).getContext("2d");
+                    var onlineChart = new Chart(onlineContext).Pie(onlineStatistics);
+                    legend(document.getElementById("onlineLegend"), onlineStatistics);
+                };
                 
                 $.connection.hub.start().done(function () {
                     console.info('SignalR connected');
-                    $('#search').click(function (event) {
-                        event.preventDefault();
-                        userInfoHub.server.getUserInfo($('#queryField').val(), "facebook");
-                    });
                 });
+
+                function networkChoiseModel() {
+                    var self = this;
+                    self.network = ko.observable("");
+                    self.search = function () {
+                       userInfoHub.server.getUserInfo($('#queryField').val(), self.network());
+                       userInfoHub.server.getFriendsInfo($('#queryField').val(), self.network());
+                    };
+                }
+
+                ko.applyBindings(new networkChoiseModel());
             });
         </script>
     </body>

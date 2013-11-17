@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using Newtonsoft.Json.Linq;
@@ -25,6 +26,11 @@ namespace SocialSpy.Services
             }
             userInfo.PictureUrl = string.Format("https://graph.facebook.com/{0}/picture?type=large", user);
             return userInfo;
+        }
+
+        public FriendsInfo GetFriendsInfo(string user)
+        {
+            throw new NotImplementedException();
         }
     }
 }

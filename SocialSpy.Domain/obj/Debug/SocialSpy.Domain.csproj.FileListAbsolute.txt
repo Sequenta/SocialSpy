@@ -2,3 +2,6 @@ C:\Dev\Projects\SocialSpy\SocialSpy.Domain\bin\Debug\SocialSpy.Domain.dll
 C:\Dev\Projects\SocialSpy\SocialSpy.Domain\bin\Debug\SocialSpy.Domain.pdb
 C:\Dev\Projects\SocialSpy\SocialSpy.Domain\obj\Debug\SocialSpy.Domain.dll
 C:\Dev\Projects\SocialSpy\SocialSpy.Domain\obj\Debug\SocialSpy.Domain.pdb
+C:\Dev\Projects\SocialSpy\SocialSpy.Domain\bin\Debug\Newtonsoft.Json.dll
+C:\Dev\Projects\SocialSpy\SocialSpy.Domain\bin\Debug\Newtonsoft.Json.xml
+C:\Dev\Projects\SocialSpy\SocialSpy.Domain\obj\Debug\SocialSpy.Domain.csprojResolveAssemblyReference.cache

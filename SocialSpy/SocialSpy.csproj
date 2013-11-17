@@ -229,6 +229,7 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\chart.js" />
     <Content Include="Scripts\flot\excanvas.js" />
     <Content Include="Scripts\flot\excanvas.min.js" />
     <Content Include="Scripts\flot\jquery.colorhelpers.js" />
@@ -282,6 +283,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\legend.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.Generic.config">
