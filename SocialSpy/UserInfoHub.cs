@@ -25,12 +25,15 @@ namespace SocialSpy
         {
             var service = services[socialNetwork];
             var friendsInfo = service.GetFriendsInfo(user);
+            if (friendsInfo.FriendsList == null || friendsInfo.Statistic == null) return;
             Clients.Caller.viewFriendsInfo(friendsInfo.FriendsList.ToString());
-            Clients.Caller.viewFriendsStatistics(new { boys = friendsInfo.Statistic[0], 
-                                                       girls = friendsInfo.Statistic[1],
-                                                       undefined = friendsInfo.Statistic[2],
-                                                       online = friendsInfo.Statistic[3],
-                                                       offline = friendsInfo.Statistic[4]
+            Clients.Caller.viewFriendsStatistics(new
+            {
+                boys = friendsInfo.Statistic[0],
+                girls = friendsInfo.Statistic[1],
+                undefined = friendsInfo.Statistic[2],
+                online = friendsInfo.Statistic[3],
+                offline = friendsInfo.Statistic[4]
             });
         }
     }

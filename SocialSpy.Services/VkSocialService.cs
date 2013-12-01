@@ -39,7 +39,10 @@ namespace SocialSpy.Services
                 {
                     var friendsInfoJson = JObject.Parse(sr.ReadToEnd())["response"];
                     friendsInfo.FriendsList = friendsInfoJson;
-                    friendsInfo.Statistic = GetFriendsStatistic(friendsInfoJson);
+                    if (friendsInfoJson != null)
+                    {
+                        friendsInfo.Statistic = GetFriendsStatistic(friendsInfoJson);
+                    }
                 }
             }
             return friendsInfo;
