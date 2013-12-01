@@ -91,7 +91,6 @@
                 var userInfoHub = $.connection.userInfoHub;
                 userInfoHub.client.viewUserInfo = function (data) {
                     var json = JSON.parse(data);
-                    $("#userInfo").html("");
                     $.tmpl("userViewTemplate", json).appendTo("#userInfo");
                 };
                 
@@ -147,9 +146,17 @@
                     var self = this;
                     self.network = ko.observable("");
                     self.search = function () {
+                       clearFileds();
                        userInfoHub.server.getUserInfo($('#queryField').val(), self.network());
                        userInfoHub.server.getFriendsInfo($('#queryField').val(), self.network());
                     };
+                }
+                
+                function clearFileds() {
+                    $("#userInfo").html("");
+                    $('#friendsInfo').html('');
+                    $('#sexLegend').html('');
+                    $('#onlineLegend').html('');
                 }
 
                 ko.applyBindings(new networkChoiseModel());
